@@ -1,3 +1,13 @@
-export default function Home() {
-  return <h1>Hello World!</h1>;
+export default function Page() {
+  return (
+    <div className="bg-slate-700">
+      <h1 className="text-3x1 font-bold underline text-red-600">
+        Hello World!
+      </h1>
+      <p className="text-red-50">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
+        laboriosam, quae iste odit autem quisquam cumque illo at. Natus
+      </p>
+    </div>
+  );
 }
