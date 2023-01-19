@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <div className="bg-slate-700">
+    <div className="bg-slate-700 p-4">
       <h1 className="text-3x1 font-bold underline text-red-600">
         Hello World!
       </h1>
