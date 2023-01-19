@@ -29,6 +29,25 @@
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/no-unescaped-entities": [
+      "error",
+      {
+        "forbid": [
+          {
+            "char": ">",
+            "alternatives": [
+              "&gt;"
+            ]
+          },
+          {
+            "char": "}",
+            "alternatives": [
+              "&#125;"
+            ]
+          }
+        ]
+      }
+    ],
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
     "react/prop-types": "off",

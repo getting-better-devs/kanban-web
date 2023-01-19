@@ -1,0 +1,74 @@
+🔎 checking possible migrations..
+
+attention => Storybook now collects completely anonymous telemetry regarding usage.
+This information is used to shape Storybook's roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://storybook.js.org/telemetry
+
+
+🔎 found a 'eslintPlugin' migration:
+╭ Automigration detected ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                      │
+│   We've detected you are not using our eslint-plugin.                                                                                │
+│                                                                                                                                      │
+│   In order to have the best experience with Storybook and follow best practices, we advise you to install eslint-plugin-storybook.   │
+│                                                                                                                                      │
+│   More info: https://github.com/storybookjs/eslint-plugin-storybook#readme                                                           │
+│                                                                                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[?25l? Do you want to run the 'eslintPlugin' migration on your project? › (Y/n)[2K[G✔ Do you want to run the 'eslintPlugin' migration on your project? … yes
+[?25h✅ Adding dependencies: eslint-plugin-storybook
+✅ Adding Storybook plugin to .eslintrc.json
+❌ error when running eslintPlugin migration
+SyntaxError: .eslintrc.json: Unexpected token / in JSON at position 308
+    at JSON.parse (<anonymous>)
+    at _readFile (/home/rhuanbello/.npm/_npx/eb8bf615e50a412a/node_modules/jsonfile/index.js:25:16)
+    at async Object.run (/home/rhuanbello/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:118:141)
+    at async automigrate (/home/rhuanbello/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:317:1143)
+    at async doInitiate (/home/rhuanbello/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:375:361)
+    at async withTelemetry (/home/rhuanbello/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/core-server/dist/index.js:33:5540)
+    at async initiate (/home/rhuanbello/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:381:133)
+
+
+🔎 found a 'mdx1to2' migration:
+╭ Automigration detected ──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                          │
+│   We've found 1 '.stories.mdx' files in your project.                                                                    │
+│                                                                                                                          │
+│   Storybook has upgraded to MDX2 (https://mdxjs.com/blog/v2/), which contains breaking changes from V1.                  │
+│   We can try to automatically upgrade your MDX files to MDX2 format using some common patterns.                          │
+│                                                                                                                          │
+│   Some steps might require manual intervention. You can find a full guide for how to manually upgrade your files here:   │
+│   https://storybook.js.org/docs/7.0/react/writing-docs/mdx#breaking-changes                                              │
+│                                                                                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[?25l? Do you want to run the 'mdx1to2' migration on your project? › (Y/n)[2K[G✔ Do you want to run the 'mdx1to2' migration on your project? … yes
+[?25h🆗 Unmodified Introduction.stories.mdx
+✅ ran mdx1to2 migration
+
+╭ Migration check ran with failures ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                               │
+│                                                                                                                                                               │
+│         Successful migrations:                                                                                                                                │
+│                                                                                                                                                               │
+│    mdx1to2                                                                                                                                                    │
+│                                                                                                                                                               │
+│           Failed migrations:                                                                                                                                  │
+│                                                                                                                                                               │
+│       eslintPlugin:                                                                                                                                           │
+│       .eslintrc.json: Unexpected token / in JSON at position 308                                                                                              │
+│                                                                                                                                                               │
+│                                                                                                                                                               │
+│       You can find the full logs in /home/rhuanbello/www/2023/kanban/migration-storybook.log                                                                  │
+│                                                                                                                                                               │
+│       ─────────────────────────────────────────────────                                                                                                       │
+│                                                                                                                                                               │
+│       If you'd like to run the migrations again, you can do so by running 'npx storybook@next automigrate'                                                    │
+│                                                                                                                                                               │
+│   The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate to the latest version of Storybook.   │
+│                                                                                                                                                               │
+│   Please check the changelog and migration guide for manual migrations and more information: https://storybook.js.org/migration-guides/7.0                    │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                                                                                     │
+│                                                                                                                                                               │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
