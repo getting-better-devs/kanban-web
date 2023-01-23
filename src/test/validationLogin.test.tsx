@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it } from "@jest/globals";
 import { defaultLogin } from "../utils/validationLogin"
 
 describe("Testando validação do login com email e password", () => {
