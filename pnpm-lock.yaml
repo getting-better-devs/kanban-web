@@ -4,6 +4,7 @@ overrides:
   '@storybook/react-docgen-typescript-plugin': npm:react-docgen-typescript-plugin@1.0.2
 
 specifiers:
+  '@jest/globals': ^29.3.1
   '@next/font': 13.1.2
   '@storybook/addon-essentials': ^7.0.0-beta.30
   '@storybook/addon-interactions': ^7.0.0-beta.30
@@ -70,6 +71,7 @@ dependencies:
   typescript: 4.9.4
 
 devDependencies:
+  '@jest/globals': 29.3.1
   '@storybook/addon-essentials': 7.0.0-beta.30_biqbaboplfbrettd7655fr4n2y
   '@storybook/addon-interactions': 7.0.0-beta.30_biqbaboplfbrettd7655fr4n2y
   '@storybook/addon-links': 7.0.0-beta.30_biqbaboplfbrettd7655fr4n2y
