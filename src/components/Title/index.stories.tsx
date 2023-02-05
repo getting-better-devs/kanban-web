@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Title } from 'components/Title';
+import Title from 'components/Title';
 
 const meta: Meta<typeof Title> = {
   title: 'Components/Title',
@@ -20,5 +20,6 @@ export const Default: Story = {
     size: 'text-h1',
     weight: 'font-extrabold',
     color: "#000000",
+    isItalic: false,
   }
 };

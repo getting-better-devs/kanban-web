@@ -1,34 +1,36 @@
 "use client"
-import { useQuery } from "react-query"
-import { useForm, SubmitHandler } from "react-hook-form";
+import Title from "components/Title";
+import Board from "components/Board";
+import Column from "components/Column";
+import loadLists from "services/api";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import IColumn from "interfaces/IColumn";
+import { useState } from "react";
 
-type Inputs = {
-  example: string,
-  exampleRequired: string,
-};
+const data = loadLists() as IColumn[];
 
 export default function Page() {
-  const user = useQuery("user", () => { return { name: "lucas" } })
-  console.log(user)
+  const [lists, setLists] = useState(data);
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  // function move(fromList, toList, from, to) {
+  //   setLists(produce(lists, draft => {
+  //     const dragged = draft[fromList].cards[from];
 
-  console.log(watch("example")) // watch input value by passing the name of it
+  //     draft[fromList].cards.splice(from, 1);
+  //     draft[toList].cards.splice(to, 0, dragged);
+  //   }))
+  // }
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <input defaultValue="test" {...register("example")} />
-
-        {/* include validation with required or other standard HTML validation rules */}
-        <input {...register("exampleRequired", { required: true })} />
-        {/* errors will return when field validation fails  */}
-        {errors.exampleRequired && <span>This field is required</span>}
-
-        <input type="submit" />
-      </form>
-    </>
+    <DndProvider backend={HTML5Backend}>
+      <Title color="#9e4d0b" label="Ola, mundo!" size="text-h2" weight="font-bold" isItalic={false} />
+      <Board bgColor="#F2F2F2">
+        {
+          lists.map((list, index) =>
+            <Column key={list.title} listIndex={index} data={list} />)
+        }
+      </Board>
+    </DndProvider>
   );
 }
