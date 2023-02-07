@@ -7,11 +7,13 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import IColumn from "interfaces/IColumn";
 import { useState } from "react";
+import { useQuery } from "react-query";
 
-const data = loadLists() as IColumn[];
+const list = loadLists() as IColumn[];
 
 export default function Page() {
-  const [lists, setLists] = useState(data);
+
+  const { data } = useQuery(["board"], () => list)
 
   // function move(fromList, toList, from, to) {
   //   setLists(produce(lists, draft => {
@@ -21,13 +23,12 @@ export default function Page() {
   //     draft[toList].cards.splice(to, 0, dragged);
   //   }))
   // }
-
   return (
     <DndProvider backend={HTML5Backend}>
       <Title color="#9e4d0b" label="Ola, mundo!" size="text-h2" weight="font-bold" isItalic={false} />
       <Board bgColor="#F2F2F2">
         {
-          lists.map((list, index) =>
+          data?.map((list, index) =>
             <Column key={list.title} listIndex={index} data={list} />)
         }
       </Board>

@@ -1,7 +1,7 @@
 import ICard from "interfaces/ICard"
+import { RefObject } from "react"
 
 export type CardProps = {
-    data: ICard,
-    index: number,
+    card: ICard,
     listIndex: number
 }

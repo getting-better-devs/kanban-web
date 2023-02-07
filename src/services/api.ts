@@ -77,12 +77,12 @@ export default function loadLists() {
                     labels: [],
                 },
                 {
-                    id: 12,
+                    id: 11,
                     content: 'Gravar testes e deploy ReactJS',
                     labels: ['#54e1f7'],
                 },
                 {
-                    id: 13,
+                    id: 12,
                     content: 'Gravar Aula "Internacionalização de aplicações Node.js, ReactJS e React Native"',
                     labels: ['#7159c1'],
                 }
