@@ -15,19 +15,38 @@ export const Sidebar = () => {
     ({ openSidebar, setOpenSidebar }) => [openSidebar, setOpenSidebar]
   );
 
+  const logoAnimation = {
+    visible: {
+      opacity: 1,
+    },
+    hidden: {
+      opacity: 0,
+    },
+  };
+
   const item = {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 300, damping: 24 },
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 24,
+      },
     },
-    hidden: { opacity: 0, y: 20, transition: { duration: 0.2 } },
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: {
+        duration: 0.2,
+      },
+    },
   };
 
   const list = {
     visible: {
       width: 320,
-      opacity: 1,
+      padding: "2rem 1.5rem 2rem 1.5rem",
 
       transition: {
         type: "spring",
@@ -40,17 +59,9 @@ export const Sidebar = () => {
 
     hidden: {
       width: 0,
-      opacity: 0,
-    },
-
-    exit: {
-      opacity: 0,
-      width: 0,
-
+      padding: 0,
       transition: {
-        type: "spring",
-        duration: 0.7,
-        bounce: 0,
+        when: "afterChildren",
       },
     },
   };
@@ -65,11 +76,11 @@ export const Sidebar = () => {
             animate="visible"
             exit="hidden"
             variants={list}
-            className="bg-theme-dark-700 border-r-2 border-theme-dark-500 flex flex-col gap-6 justify-center h-screen w-1/5 relative top-0 left-0 px-6 py-8"
+            className="bg-theme-dark-700 border-r-2 border-theme-dark-500 flex flex-col gap-6 justify-center h-screen w-1/5 relative top-0 left-0"
           >
-            <div className="w-full mb-3">
+            <motion.div className="w-full mb-3" variants={logoAnimation}>
               <Logo />
-            </div>
+            </motion.div>
 
             <motion.h2
               variants={item}
@@ -110,7 +121,7 @@ export const Sidebar = () => {
             </motion.span>
 
             <motion.div
-              variants={item}
+              variants={logoAnimation}
               onClick={() => setOpenSidebar(!openSidebar)}
               className="mt-auto mr-auto flex items-center gap-2 text-theme-grey-900 cursor-pointer"
             >
