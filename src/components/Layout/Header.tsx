@@ -1,15 +1,21 @@
-import Image from "next/image";
+"use client";
 
-import Logo from "../../../public/logo.svg";
+import { useSidebarStore } from "@/store/useSidebarStore";
+
+import { Logo } from "./Logo";
 
 export const Header = () => {
-  return (
-    <header className="bg-theme-dark-700 border-b-2 border-theme-dark-500 flex gap-6 items-center">
-      <div className="border-r-2 border-theme-dark-500 px-6 py-8 block h-full">
-        <Image src={Logo} alt="Kanban Logo" draggable={false} />
-      </div>
+  const openSidebar = useSidebarStore(({ openSidebar }) => openSidebar);
 
-      <h1 className="text-2xl font-bold">Platform Launch</h1>
+  return (
+    <header className="bg-theme-dark-700 border-b-2 border-theme-dark-500 flex items-center h-24">
+      {!openSidebar && (
+        <div className="px-6 py-8 border-r-2 border-theme-dark-500">
+          <Logo />
+        </div>
+      )}
+
+      <h1 className="text-2xl font-bold ml-6">Platform Launch</h1>
     </header>
   );
 };

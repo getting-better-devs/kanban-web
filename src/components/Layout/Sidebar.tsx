@@ -1,34 +1,127 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment } from "react";
 
-import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
+import { useSidebarStore } from "@/store/useSidebarStore";
+import { EyeSlashIcon } from "@heroicons/react/24/solid";
+import { AnimatePresence, motion } from "framer-motion";
+
+import BoardIcon from "../../../public/icons/board.svg";
+import { Logo } from "./Logo";
+import { OpenSidebar } from "./OpenSidebar";
 
 export const Sidebar = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [openSidebar, setOpenSidebar] = useSidebarStore(
+    ({ openSidebar, setOpenSidebar }) => [openSidebar, setOpenSidebar]
+  );
 
-  if (!isSidebarOpen) {
-    return (
-      <div
-        onClick={() => setSidebarOpen(!isSidebarOpen)}
-        className="bg-theme-purple-200 absolute bottom-6 left-0 p-4 px-5 rounded-r-full cursor-pointer"
-      >
-        <EyeIcon className="text-white w-5 h-5" />
-      </div>
-    );
-  }
+  const item = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 300, damping: 24 },
+    },
+    hidden: { opacity: 0, y: 20, transition: { duration: 0.2 } },
+  };
+
+  const list = {
+    visible: {
+      width: 320,
+      opacity: 1,
+
+      transition: {
+        type: "spring",
+        bounce: 0,
+        duration: 0.7,
+        delayChildren: 0.3,
+        staggerChildren: 0.05,
+      },
+    },
+
+    hidden: {
+      width: 0,
+      opacity: 0,
+    },
+
+    exit: {
+      opacity: 0,
+      width: 0,
+
+      transition: {
+        type: "spring",
+        duration: 0.7,
+        bounce: 0,
+      },
+    },
+  };
 
   return (
-    <aside className="bg-theme-dark-700 border-r-2 border-theme-dark-500 flex flex-col gap-6 items-center h-screen w-1/5 relative top-0 left-0">
-      <h1 className="text-2xl font-bold">Sidebar</h1>
+    <Fragment>
+      <AnimatePresence>
+        {openSidebar && (
+          <motion.nav
+            key="nav"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={list}
+            className="bg-theme-dark-700 border-r-2 border-theme-dark-500 flex flex-col gap-6 justify-center h-screen w-1/5 relative top-0 left-0 px-6 py-8"
+          >
+            <div className="w-full mb-3">
+              <Logo />
+            </div>
 
-      <div
-        onClick={() => setSidebarOpen(!isSidebarOpen)}
-        className="mt-auto mr-auto flex items-center gap-2 text-theme-grey-900 cursor-pointer pl-8 pb-8"
-      >
-        <EyeSlashIcon className="w-4 h-4 text-theme-grey-900" />
-        <span className="text-sm">Hide Sidebar</span>
-      </div>
-    </aside>
+            <motion.h2
+              variants={item}
+              className="font-bold uppercase text-theme-grey-900 text-xs leading-4 tracking-[2.4px] mt-3"
+            >
+              All Boards (1)
+            </motion.h2>
+
+            <motion.span
+              variants={item}
+              className="font-bold capitalize text-theme-grey-900 text-sm leading-4 mt-3 flex gap-3"
+            >
+              <BoardIcon />
+              Platform Launch
+            </motion.span>
+
+            <motion.span
+              variants={item}
+              className="font-bold capitalize text-theme-grey-900 text-sm leading-4 mt-3 flex gap-3"
+            >
+              <BoardIcon />
+              Marketing Plan
+            </motion.span>
+
+            <motion.span
+              variants={item}
+              className="font-bold capitalize text-theme-grey-900 text-sm leading-4 mt-3 flex gap-3"
+            >
+              <BoardIcon />
+              Roadmap
+            </motion.span>
+
+            <motion.span
+              variants={item}
+              className="font-bold capitalize text-theme-purple-200 text-sm leading-4 mt-3 flex gap-3"
+            >
+              <BoardIcon />+ Create New Board
+            </motion.span>
+
+            <motion.div
+              variants={item}
+              onClick={() => setOpenSidebar(!openSidebar)}
+              className="mt-auto mr-auto flex items-center gap-2 text-theme-grey-900 cursor-pointer"
+            >
+              <EyeSlashIcon className="w-4 h-4 text-theme-grey-900" />
+              <span className="text-sm">Hide Sidebar</span>
+            </motion.div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>{!openSidebar && <OpenSidebar />}</AnimatePresence>
+    </Fragment>
   );
 };
