@@ -4,23 +4,8 @@ import { useSidebarStore } from "@/store/useSidebarStore";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 
-export const OpenSidebar = () => {
-  const [openSidebar, setOpenSidebar] = useSidebarStore(
-    ({ openSidebar, setOpenSidebar }) => [openSidebar, setOpenSidebar]
-  );
-
-  const openSidebarAnimation = {
-    borderTopRightRadius: ["5%", "50%"],
-    borderBottomRightRadius: ["5%", "50%"],
-
-    transition: {
-      duration: 0.3,
-      bounce: 0,
-      delay: 1,
-    },
-  };
-
-  const containerVariant = {
+const animations = {
+  container: {
     visible: {
       x: 0,
       opacity: 1,
@@ -35,12 +20,33 @@ export const OpenSidebar = () => {
       x: -100,
       opacity: 0,
     },
-  };
+  },
+
+  openSidebar: {
+    borderTopRightRadius: ["5%", "50%"],
+    borderBottomRightRadius: ["5%", "50%"],
+
+    transition: {
+      duration: 0.3,
+      bounce: 0,
+      delay: 1,
+    },
+  },
+};
+
+export const OpenSidebar = () => {
+  const [openSidebar, setOpenSidebar] = useSidebarStore(
+    ({ openSidebar, setOpenSidebar }) => [openSidebar, setOpenSidebar]
+  );
 
   return (
-    <motion.div initial="hidden" animate="visible" variants={containerVariant}>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={animations.container}
+    >
       <motion.div
-        animate={openSidebarAnimation}
+        animate={animations.openSidebar}
         onClick={() => setOpenSidebar(!openSidebar)}
         className="bg-theme-purple-200 absolute bottom-6 left-0 p-4 pr-5 pl-7 cursor-pointer"
       >
