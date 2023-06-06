@@ -2,9 +2,12 @@
 
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import { motion } from "framer-motion";
+import { motion, TargetAndTransition, Variants } from "framer-motion";
 
-const animations = {
+const animations: {
+  container: Variants;
+  openSidebar: TargetAndTransition;
+} = {
   container: {
     visible: {
       x: 0,

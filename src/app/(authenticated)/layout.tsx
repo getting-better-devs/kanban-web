@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <div className="w-full">
           <Header />
-          <main className="h-[calc(100%-96px)]">{children}</main>
+          <main className="min-h-[calc(100%-96px)]">{children}</main>
         </div>
       </div>
     </section>

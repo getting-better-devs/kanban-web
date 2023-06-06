@@ -30,6 +30,7 @@ const animations: {
   nav: {
     visible: {
       width: 320,
+      borderRight: "2px solid #3E3F4E",
 
       transition: {
         type: "spring",
@@ -41,6 +42,7 @@ const animations: {
 
     hidden: {
       width: 0,
+      borderRight: "0px solid #2B2C37",
 
       transition: {
         type: "spring",
@@ -78,7 +80,7 @@ export const Sidebar = () => {
 
   return (
     <Fragment>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {openSidebar && (
           <motion.nav
             key="nav"
@@ -86,9 +88,9 @@ export const Sidebar = () => {
             animate="visible"
             exit="hidden"
             variants={animations.nav}
-            className="bg-theme-dark-700 h-screen relative top-0 left-0 border-r-2 border-theme-dark-500"
+            className="bg-theme-dark-700 h-screen relative top-0 left-0"
           >
-            <div className="py-8 pr-6 flex flex-col justify-center h-full">
+            <motion.div className="py-8 pr-6 flex flex-col justify-center h-full">
               <motion.div
                 className="w-full mb-3 pl-8"
                 variants={animations.default}
@@ -98,7 +100,7 @@ export const Sidebar = () => {
 
               <motion.h2
                 variants={animations.items}
-                className="transition-colors font-bold uppercase text-theme-grey-900 text-xs leading-4 tracking-[2.4px] mt-10 mb-3 pl-8"
+                className="transition-colors font-bold uppercase text-theme-grey-900 text-xs leading-4 tracking-[2.4px] mt-10 mb-3 pl-8 cursor-default"
               >
                 All Boards (1)
               </motion.h2>
@@ -115,7 +117,10 @@ export const Sidebar = () => {
                 <BoardIcon /> Roadmap
               </SidebarItem>
 
-              <SidebarItem variants={animations.items}>
+              <SidebarItem
+                variants={animations.items}
+                className="text-theme-purple-200"
+              >
                 <BoardIcon />+ Create New Board
               </SidebarItem>
 
@@ -127,7 +132,7 @@ export const Sidebar = () => {
                 <EyeSlashIcon className="w-4 h-4 text-theme-grey-900 group-hover:text-white" />
                 <span className="text-sm">Hide Sidebar</span>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.nav>
         )}
       </AnimatePresence>

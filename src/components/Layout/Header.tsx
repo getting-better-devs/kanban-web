@@ -1,4 +1,6 @@
 "use client";
+import React, { ReactNode } from "react";
+
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { motion, TargetAndTransition } from "framer-motion";
 
@@ -17,6 +19,26 @@ const animations: TargetAndTransition = {
 export const Header = () => {
   const openSidebar = useSidebarStore(({ openSidebar }) => openSidebar);
 
+  const Title = ({ children }: { children: ReactNode }) => {
+    const className = "text-2xl font-bold ml-6 cursor-default";
+    return !openSidebar ? (
+      <motion.h1
+        className={className}
+        animate={{
+          ...animations,
+          transition: {
+            ...animations.transition,
+            delay: 0.4,
+          },
+        }}
+      >
+        {children}
+      </motion.h1>
+    ) : (
+      <h1 className={className}>{children}</h1>
+    );
+  };
+
   return (
     <header className="bg-theme-dark-700 border-b-2 border-theme-dark-500 flex items-center h-24">
       {!openSidebar && (
@@ -28,22 +50,7 @@ export const Header = () => {
         </motion.div>
       )}
 
-      {!openSidebar ? (
-        <motion.h1
-          animate={{
-            ...animations,
-            transition: {
-              ...animations.transition,
-              delay: 0.4,
-            },
-          }}
-          className="text-2xl font-bold ml-6"
-        >
-          Platform Launch
-        </motion.h1>
-      ) : (
-        <h1 className="text-2xl font-bold ml-6">Platform Launch</h1>
-      )}
+      <Title>Plataform Launch</Title>
     </header>
   );
 };
