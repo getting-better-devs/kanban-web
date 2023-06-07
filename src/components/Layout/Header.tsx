@@ -8,10 +8,9 @@ import { Logo } from "./Logo";
 
 const animations: TargetAndTransition = {
   opacity: [0, 1],
-  y: [-20, 0],
   transition: {
     delay: 0.3,
-    duration: 0.3,
+    type: "spring",
     bounce: 0,
   },
 };
@@ -22,16 +21,7 @@ export const Header = () => {
   const Title = ({ children }: { children: ReactNode }) => {
     const className = "text-2xl font-bold ml-6 cursor-default";
     return !openSidebar ? (
-      <motion.h1
-        className={className}
-        animate={{
-          ...animations,
-          transition: {
-            ...animations.transition,
-            delay: 0.4,
-          },
-        }}
-      >
+      <motion.h1 className={className} animate={animations}>
         {children}
       </motion.h1>
     ) : (

@@ -105,12 +105,7 @@ export default function Board() {
         {columns.map(({ id, title, tasks }) => (
           <Column key={id} title={title} tasksLength={tasks.length}>
             {tasks.map(({ description, subtasks }, index) => (
-              <Task
-                index={index}
-                key={index}
-                description={description}
-                subtasks={subtasks}
-              />
+              <Task key={index} description={description} subtasks={subtasks} />
             ))}
           </Column>
         ))}

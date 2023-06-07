@@ -4,15 +4,12 @@ import { motion } from "framer-motion";
 
 import { TaskComponent } from "./types";
 
-export const Task = ({ description, subtasks, index }: TaskComponent) => {
+export const Task = ({ description, subtasks }: TaskComponent) => {
   return (
     <motion.div
-      layout
-      animate={{ opacity: 1 }}
-      initial={{ opacity: 0 }}
-      transition={{
-        type: "spring",
-        delay: index * 0.2,
+      variants={{
+        hidden: { opacity: 0 },
+        show: { opacity: 1 },
       }}
       className="w-full max-h-32 bg-theme-dark-700 px-4 py-6 rounded-lg cursor-pointer"
     >
