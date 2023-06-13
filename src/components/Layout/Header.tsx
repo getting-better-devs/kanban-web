@@ -1,15 +1,46 @@
-import Image from "next/image";
+"use client";
+import React, { ReactNode } from "react";
 
-import Logo from "../../../public/logo.svg";
+import { useSidebarStore } from "@/store/useSidebarStore";
+import { motion, TargetAndTransition } from "framer-motion";
+
+import { Logo } from "./Logo";
+
+const animations: TargetAndTransition = {
+  opacity: [0, 1],
+  transition: {
+    delay: 0.3,
+    type: "spring",
+    bounce: 0,
+  },
+};
 
 export const Header = () => {
-  return (
-    <header className="bg-theme-dark-700 border-b-2 border-theme-dark-500 flex gap-6 items-center">
-      <div className="border-r-2 border-theme-dark-500 px-6 py-8 block h-full">
-        <Image src={Logo} alt="Kanban Logo" draggable={false} />
-      </div>
+  const openSidebar = useSidebarStore(({ openSidebar }) => openSidebar);
 
-      <h1 className="text-2xl font-bold">Platform Launch</h1>
+  const Title = ({ children }: { children: ReactNode }) => {
+    const className = "text-2xl font-bold ml-6 cursor-default";
+    return !openSidebar ? (
+      <motion.h1 className={className} animate={animations}>
+        {children}
+      </motion.h1>
+    ) : (
+      <h1 className={className}>{children}</h1>
+    );
+  };
+
+  return (
+    <header className="bg-theme-dark-700 border-b-2 border-theme-dark-500 flex items-center h-24">
+      {!openSidebar && (
+        <motion.div
+          animate={animations}
+          className="px-6 py-8 border-r-2 border-theme-dark-500"
+        >
+          <Logo />
+        </motion.div>
+      )}
+
+      <Title>Plataform Launch</Title>
     </header>
   );
 };

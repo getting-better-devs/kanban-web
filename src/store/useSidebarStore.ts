@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
 interface SidebarStore {
-  isSidebarOpen: boolean;
-  setSidebarOpen: (isSidebarOpen: boolean) => void;
+  openSidebar: boolean;
+  setOpenSidebar: (isSidebarOpen: boolean) => void;
 }
 
 export const useSidebarStore = create<SidebarStore>((set) => ({
-  isSidebarOpen: false,
-  setSidebarOpen: (isSidebarOpen) => set({ isSidebarOpen }),
+  openSidebar: false,
+  setOpenSidebar: (openSidebar) => set({ openSidebar }),
 }));
