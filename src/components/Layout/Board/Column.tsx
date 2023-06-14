@@ -11,6 +11,22 @@ export const Column = ({
   tasksLength: number;
   children: React.ReactNode;
 }) => {
+  const FADE_IN_ANIMATION_VARIANTS = {
+    initial: {
+      opacity: 0,
+      y: 20,
+    },
+    animate: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.05,
+      },
+    }),
+  };
+
+  const letters = title.concat(` (${tasksLength})`).split("");
+
   return (
     <motion.li
       className="space-y-6 w-72"
@@ -27,9 +43,24 @@ export const Column = ({
       initial="hidden"
       animate="show"
     >
-      <motion.span className="text-theme-grey-900 uppercase text-xs font-bold tracking-[2.4px] leading-4 before:p-0 flex before:flex before-items-center before:mr-3 before:w-[15px] before:h-[15px] before:rounded-full before:bg-theme-purple-200 relative left-0 top-0">
-        {title} ({tasksLength})
-      </motion.span>
+      <div className="flex items-center">
+        <motion.span className="inline mr-3 w-[15px] h-[15px] rounded-full bg-theme-purple-200" />
+
+        <div className="inline">
+          {letters.map((letter, i) => (
+            <motion.span
+              key={i}
+              variants={FADE_IN_ANIMATION_VARIANTS}
+              initial="initial"
+              animate="animate"
+              custom={i}
+              className="text-theme-grey-900 uppercase text-xs font-bold tracking-[2.4px] leading-4 inline"
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </div>
+      </div>
 
       {children}
     </motion.li>
